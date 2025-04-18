@@ -60,17 +60,72 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
 
 ---
 
+### 🖥️ Installation rapide en ligne de commande (Linux/Debian/Ubuntu)
+
+#### Installer Java (OpenJDK 11 recommandé)
+
+```bash
+sudo apt update
+sudo apt install openjdk-11-jdk
+java -version
+```
+
+### Installer MySQL Server
+
+```bash
+sudo apt install mysql-server
+sudo systemctl start mysql
+sudo systemctl enable mysql
+mysql --version
+```
+
+### (Optionnel) Sécuriser MySQL
+
+```bash
+sudo mysql_secure_installation
+```  
+
+### Télécharger et ajouter le JDBC Driver (manuel)
+
+1. Télécharger le .jar depuis : https://dev.mysql.com/downloads/connector/j/
+2. Ajouter le fichier .jar dans le classpath lors de la compilation ou l'exécution :
+   
+```bash
+javac -cp .:mysql-connector-j-8.4.0.jar Main.java
+java -cp .:mysql-connector-j-8.4.0.jar Main
+```
+
 ## 🛠️ Installation
 
 1. **Clonez** ce dépôt sur votre machine locale
-2. Assurez-vous que **MySQL** est **installé** et en **cours d'exécution**
-3. Créez une **base de données** nommée `restaurant` (l'application peut le faire automatiquement)
-4. Modifiez les **constantes de connexion** dans la classe `Database.java` si nécessaire :
-   - `DB_USER`
-   - `DB_PASSWORD`
-   - `DB_URL`
-5. **Compilez** le projet
+   
+```bash
+git clone https://github.com/ton-utilisateur/restaurant-manager.git
+cd restaurant-manager
+```
 
+2. **Créez** la base de données **MySQL**
+
+```sql
+-- Depuis le terminal MySQL :
+CREATE DATABASE restaurant;
+```
+
+[!NOTE] La base de données peut aussi être créée automatiquement au lancement de l'application.
+
+3. **Configurez** la connexion dans **Database.java**
+**Modifiez** les constantes suivantes avec vos **identifiants MySQL** :
+```java
+public static final String DB_URL = "jdbc:mysql://localhost:3306/restaurant";
+public static final String DB_USER = "root";
+public static final String DB_PASSWORD = "votre_mot_de_passe";
+```
+
+4. **Compilez** et **lancez** le projet:
+```bash
+javac -cp .:mysql-connector-j-8.4.0.jar Main.java
+java -cp .:mysql-connector-j-8.4.0.jar Main
+```
 ## ▶️ Utilisation
 
 1. Lancez l'**application** via la classe `Main`
