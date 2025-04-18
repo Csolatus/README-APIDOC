@@ -55,7 +55,8 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
 | **MySQL**   | 5.7 ou supérieur    | [Télécharger MySQL](https://dev.mysql.com/downloads/mysql/)   |
 | **JDBC Driver** | MySQL Connector/J | [Télécharger le Connecteur JDBC](https://dev.mysql.com/downloads/connector/j/) |
 
-> ⚠️ Assurez-vous que MySQL est installé, en cours d'exécution et que le port est ouvert (par défaut : 3306)
+> [!WARNING]
+> Assurez-vous que **MySQL est installé**, **en cours d'exécution** et que **le port 3306** est bien ouvert.
 
 ---
 
