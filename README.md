@@ -1,4 +1,4 @@
-<div> <img src="public/zizou.webp" width=250px> </div>
+<div align="center"> <img src="public/zizou.webp" width=250px> </div>
 
 # Application de Gestion de Restaurant
 
