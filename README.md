@@ -111,7 +111,7 @@ cd restaurant-manager
 CREATE DATABASE restaurant;
 ```
 
-[!NOTE] La base de données peut aussi être créée automatiquement au lancement de l'application.
+> [!NOTE] La base de données peut aussi être créée automatiquement au lancement de l'application.
 
 3. **Configurez** la connexion dans **Database.java**
 **Modifiez** les constantes suivantes avec vos **identifiants MySQL** :
