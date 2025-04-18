@@ -3,15 +3,11 @@
   "info": {
     "title": "API de Gestion de Restaurant",
     "description": "API RESTful pour gérer un restaurant, incluant la gestion des menus, des stocks, des commandes et des employés.\nCette API expose les fonctionnalités principales de l'application de gestion de restaurant.\n",
-    "version": "1.0.0",
-    "contact": {
-      "name": "Support Technique",
-      "email": "support@restaurant-api.com"
-    }
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api",
+      "url": "http://LaBellaTravola",
       "description": "Serveur de développement local"
     }
   ],
