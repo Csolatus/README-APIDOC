@@ -1,0 +1,917 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Gestion de Restaurant",
+    "description": "API RESTful pour gérer un restaurant, incluant la gestion des menus, des stocks, des commandes et des employés.\nCette API expose les fonctionnalités principales de l'application de gestion de restaurant.\n",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Support Technique",
+      "email": "support@restaurant-api.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api",
+      "description": "Serveur de développement local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Menu",
+      "description": "Opérations liées à la gestion du menu"
+    },
+    {
+      "name": "Stock",
+      "description": "Opérations liées à la gestion du stock"
+    },
+    {
+      "name": "Commandes",
+      "description": "Opérations liées à la gestion des commandes"
+    },
+    {
+      "name": "Employés",
+      "description": "Opérations liées à la gestion des employés"
+    }
+  ],
+  "paths": {
+    "/menu": {
+      "get": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "Récupérer le menu complet",
+        "description": "Retourne la liste de tous les plats disponibles dans le menu",
+        "responses": {
+          "200": {
+            "description": "Liste des plats récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plat"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "Ajouter un plat au menu",
+        "description": "Ajoute un nouveau plat au menu",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatComplet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Plat créé avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/menu/{id}": {
+      "get": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "Récupérer un plat spécifique",
+        "description": "Retourne les détails d'un plat spécifique par son ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID du plat à récupérer",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plat récupéré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatComplet"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Plat non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "Mettre à jour un plat",
+        "description": "Met à jour un plat existant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID du plat à mettre à jour",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatComplet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Plat mis à jour avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Plat non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Menu"
+        ],
+        "summary": "Supprimer un plat",
+        "description": "Supprime un plat du menu par son ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID du plat à supprimer",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Plat supprimé avec succès"
+          },
+          "404": {
+            "description": "Plat non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/stock": {
+      "get": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Récupérer l'état du stock",
+        "description": "Retourne la liste de tous les ingrédients en stock avec leurs quantités",
+        "responses": {
+          "200": {
+            "description": "Stock récupéré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IngredientStock"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Ajouter des ingrédients au stock",
+        "description": "Ajoute ou met à jour des ingrédients dans le stock",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IngredientStock"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stock mis à jour avec succès"
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/stock/{id}": {
+      "put": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Mettre à jour la quantité d'un ingrédient",
+        "description": "Met à jour la quantité d'un ingrédient spécifique dans le stock",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de l'ingrédient à mettre à jour",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantite": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Nouvelle quantité de l'ingrédient"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Quantité d'ingrédient mise à jour avec succès"
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Ingrédient non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/commandes": {
+      "get": {
+        "tags": [
+          "Commandes"
+        ],
+        "summary": "Récupérer toutes les commandes",
+        "description": "Retourne la liste de toutes les commandes",
+        "responses": {
+          "200": {
+            "description": "Commandes récupérées avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Commande"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Commandes"
+        ],
+        "summary": "Créer une nouvelle commande",
+        "description": "Crée une nouvelle commande avec des plats",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Commande créée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Commande"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/commandes/{id}": {
+      "get": {
+        "tags": [
+          "Commandes"
+        ],
+        "summary": "Récupérer une commande spécifique",
+        "description": "Retourne les détails d'une commande spécifique par son ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la commande à récupérer",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Commande récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Commande"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Commande non trouvée"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/commandes/{id}/status": {
+      "put": {
+        "tags": [
+          "Commandes"
+        ],
+        "summary": "Mettre à jour le statut d'une commande",
+        "description": "Met à jour le statut d'une commande existante",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la commande à mettre à jour",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "statut": {
+                    "type": "string",
+                    "description": "Nouveau statut de la commande",
+                    "enum": [
+                      "Nouvelle",
+                      "En préparation",
+                      "Prête",
+                      "Servie",
+                      "Payée",
+                      "Annulée"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Statut de la commande mis à jour avec succès"
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Commande non trouvée"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/employes": {
+      "get": {
+        "tags": [
+          "Employés"
+        ],
+        "summary": "Récupérer tous les employés",
+        "description": "Retourne la liste de tous les employés",
+        "responses": {
+          "200": {
+            "description": "Employés récupérés avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employe"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Employés"
+        ],
+        "summary": "Ajouter un nouvel employé",
+        "description": "Ajoute un nouvel employé",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Employé créé avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/employes/{id}": {
+      "get": {
+        "tags": [
+          "Employés"
+        ],
+        "summary": "Récupérer un employé spécifique",
+        "description": "Retourne les détails d'un employé spécifique par son ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de l'employé à récupérer",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employé récupéré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employe"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employé non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Employés"
+        ],
+        "summary": "Mettre à jour les informations d'un employé",
+        "description": "Met à jour les informations d'un employé existant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de l'employé à mettre à jour",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Employé mis à jour avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Employé non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Employés"
+        ],
+        "summary": "Supprimer un employé",
+        "description": "Supprime un employé par son ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de l'employé à supprimer",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Employé supprimé avec succès"
+          },
+          "404": {
+            "description": "Employé non trouvé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Ingredient": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID unique de l'ingrédient"
+          },
+          "nom": {
+            "type": "string",
+            "description": "Nom de l'ingrédient"
+          },
+          "unite": {
+            "type": "string",
+            "description": "Unité de mesure de l'ingrédient (kg, g, l, ml, etc.)"
+          }
+        },
+        "required": [
+          "nom",
+          "unite"
+        ]
+      },
+      "IngredientStock": {
+        "type": "object",
+        "properties": {
+          "ingredient": {
+            "$ref": "#/components/schemas/Ingredient"
+          },
+          "quantite": {
+            "type": "number",
+            "format": "double",
+            "description": "Quantité de l'ingrédient en stock"
+          }
+        },
+        "required": [
+          "ingredient",
+          "quantite"
+        ]
+      },
+      "IngredientPlat": {
+        "type": "object",
+        "properties": {
+          "ingredient": {
+            "$ref": "#/components/schemas/Ingredient"
+          },
+          "quantiteNecessaire": {
+            "type": "number",
+            "format": "double",
+            "description": "Quantité de l'ingrédient nécessaire pour le plat"
+          }
+        },
+        "required": [
+          "ingredient",
+          "quantiteNecessaire"
+        ]
+      },
+      "Plat": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID unique du plat"
+          },
+          "nom": {
+            "type": "string",
+            "description": "Nom du plat"
+          },
+          "prix": {
+            "type": "number",
+            "format": "double",
+            "description": "Prix du plat"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type du plat (Pizza, Pâtes, Dessert, Boisson, etc.)"
+          }
+        },
+        "required": [
+          "nom",
+          "prix",
+          "type"
+        ]
+      },
+      "PlatComplet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plat"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ingredients": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IngredientPlat"
+                },
+                "description": "Liste des ingrédients nécessaires pour le plat"
+              }
+            }
+          }
+        ]
+      },
+      "Commande": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID unique de la commande"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date et heure de la commande"
+          },
+          "statut": {
+            "type": "string",
+            "description": "Statut de la commande",
+            "enum": [
+              "Nouvelle",
+              "En préparation",
+              "Prête",
+              "Servie",
+              "Payée",
+              "Annulée"
+            ]
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "description": "Montant total de la commande"
+          },
+          "plats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatCommande"
+            },
+            "description": "Liste des plats de la commande"
+          }
+        },
+        "required": [
+          "date",
+          "statut",
+          "total"
+        ]
+      },
+      "PlatCommande": {
+        "type": "object",
+        "properties": {
+          "plat": {
+            "$ref": "#/components/schemas/Plat"
+          },
+          "quantite": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Quantité du plat dans la commande"
+          }
+        },
+        "required": [
+          "plat",
+          "quantite"
+        ]
+      },
+      "CommandeCreation": {
+        "type": "object",
+        "properties": {
+          "platsIds": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "ID du plat à commander"
+                },
+                "quantite": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Quantité du plat"
+                }
+              },
+              "required": [
+                "id",
+                "quantite"
+              ]
+            }
+          }
+        },
+        "required": [
+          "platsIds"
+        ]
+      },
+      "Employe": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID unique de l'employé"
+          },
+          "nom": {
+            "type": "string",
+            "description": "Nom de l'employé"
+          },
+          "role": {
+            "type": "string",
+            "description": "Rôle de l'employé (Serveur, Cuisinier, Gérant)",
+            "enum": [
+              "Serveur",
+              "Cuisinier",
+              "Gérant"
+            ]
+          }
+        },
+        "required": [
+          "nom",
+          "role"
+        ]
+      },
+      "EmployeCreation": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string",
+            "description": "Nom de l'employé"
+          },
+          "role": {
+            "type": "string",
+            "description": "Rôle de l'employé",
+            "enum": [
+              "Serveur",
+              "Cuisinier",
+              "Gérant"
+            ]
+          }
+        },
+        "required": [
+          "nom",
+          "role"
+        ]
+      }
+    }
+  }
+}
