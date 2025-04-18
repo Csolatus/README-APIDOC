@@ -4,34 +4,34 @@
 
 ## Description
 
-Cette application Java permet de gérer l'ensemble des opérations d'un restaurant, depuis la création de menus jusqu'à la gestion des commandes, des stocks et du personnel. Elle utilise une base de données MySQL pour stocker toutes les informations et offre une interface en ligne de commande pour interagir avec le système.
+Cette application **Java** permet de gérer l'ensemble des opérations d'un **restaurant**, depuis la création de **menus** jusqu'à la gestion des **commandes**, des **stocks** et du **personnel**. Elle utilise une base de données **MySQL** pour stocker toutes les informations et offre une **interface en ligne de commande** pour interagir avec le système.
 
 ## Fonctionnalités
 
-L'application propose les fonctionnalités suivantes :
+L'application propose les **fonctionnalités suivantes** :
 
 | Module              | Fonctionnalités principales                                                                 |
 |---------------------|---------------------------------------------------------------------------------------------|
-| **Menu**            | - Créer / afficher / supprimer des plats<br>- Gérer les ingrédients de chaque plat         |
-| **Stock**           | - Initialiser / afficher / ajouter des ingrédients<br>- Mise à jour automatique avec commandes |
-| **Commandes**       | - Créer / afficher / mettre à jour les commandes<br>- Calcul automatique du total           |
-| **Employés**        | - Ajouter / afficher / supprimer des employés<br>- Gérer les rôles (Serveur, Cuisinier, Gérant) |
+| **Menu**            | - Créer / afficher / supprimer des **plats**<br>- Gérer les **ingrédients** de chaque **plat**         |
+| **Stock**           | - Initialiser / afficher / ajouter des **ingrédients**<br>- Mise à jour **automatique** avec commandes |
+| **Commandes**       | - Créer / afficher / mettre à jour les **commandes**<br>- Calcul automatique du **total**           |
+| **Employés**        | - Ajouter / afficher / supprimer des **employés**<br>- Gérer les **rôles** (Serveur, Cuisinier, Gérant) |
 
 ---
 
 ## Architecture du Système
 
-L'application est structurée selon le modèle orienté objet avec les principales classes suivantes :
+L'application est structurée selon le modèle **orienté objet** avec les principales classes suivantes :
 
 | Classe         | Description                                                              |
 |----------------|--------------------------------------------------------------------------|
-| `Plat`         | Représente un plat (nom, prix, type, liste d’ingrédients)               |
+| `Plat`         | Représente un **plat** (nom, prix, type, liste d’ingrédients)               |
 | `Ingredient`   | Nom, quantité, unité de mesure                                           |
-| `Menu`         | Liste de plats disponibles                                               |
-| `Stock`        | Gestion des ingrédients en stock                                         |
-| `Commande`     | Contient les plats commandés                                             |
+| `Menu`         | Liste de **plats** disponibles                                               |
+| `Stock`        | Gestion des **ingrédients** en stock                                         |
+| `Commande`     | Contient les **plats** commandés                                             |
 | `Employe`      | Classe abstraite : `Serveur`, `Cuisinier`, `Gerant`                      |
-| `Database`     | Gère les connexions et requêtes vers MySQL via JDBC                     |
+| `Database`     | Gère les **connexions et requêtes** vers **MySQL** via **JDBC**                     |
 
 ---
 
@@ -39,36 +39,36 @@ L'application est structurée selon le modèle orienté objet avec les principal
 
 | Table                | Rôle                                                                 |
 |----------------------|----------------------------------------------------------------------|
-| `ingredients`        | Ingrédients disponibles                                              |
-| `plats`              | Plats proposés dans le menu                                          |
-| `plats_ingredients`  | Liaison entre plats et ingrédients                                   |
-| `commandes`          | Informations sur les commandes                                       |
-| `commandes_plats`    | Liaison entre commandes et plats                                     |
-| `employes`           | Informations sur les employés                                        |
+| `ingredients`        | **Ingrédients** disponibles                                              |
+| `plats`              | **Plats** proposés dans le **menu**                                          |
+| `plats_ingredients`  | Liaison entre **plats** et **ingrédients**                                   |
+| `commandes`          | Informations sur les **commandes**                                       |
+| `commandes_plats`    | Liaison entre **commandes** et **plats**                                     |
+| `employes`           | Informations sur les **employés**                                        |
 
 ---
 ## Prérequis
 
-- Java 8 ou supérieur 
-- MySQL 5.7 ou supérieur
-- Connecteur JDBC pour MySQL
+- **Java 8** ou supérieur 
+- **MySQL 5.7** ou supérieur
+- Connecteur **JDBC** pour **MySQL**
 
 ## Installation
 
-1. Clonez ce dépôt sur votre machine locale
-2. Assurez-vous que MySQL est installé et en cours d'exécution
-3. Créez une base de données nommée `restaurant` (l'application peut le faire automatiquement)
-4. Modifiez les constantes de connexion dans la classe `Database.java` si nécessaire :
+1. **Clonez** ce dépôt sur votre machine locale
+2. Assurez-vous que **MySQL** est **installé** et en **cours d'exécution**
+3. Créez une **base de données** nommée `restaurant` (l'application peut le faire automatiquement)
+4. Modifiez les **constantes de connexion** dans la classe `Database.java` si nécessaire :
    - `DB_USER`
    - `DB_PASSWORD`
    - `DB_URL`
-5. Compilez le projet
+5. **Compilez** le projet
 
 ## Utilisation
 
-1. Lancez l'application via la classe `Main`
-2. Utilisez le menu interactif pour accéder aux différentes fonctionnalités
-3. Suivez les instructions affichées à l'écran
+1. Lancez l'**application** via la classe `Main`
+2. Utilisez le **menu interactif** pour accéder aux différentes **fonctionnalités**
+3. Suivez les **instructions** affichées à l'écran
 
 ## Exemples d'Utilisation
 
@@ -99,32 +99,9 @@ Database.sauvegarderCommande(commande);
 
 ## API RESTful
 
-Une API RESTful peut être implémentée pour exposer les fonctionnalités de cette application. Voici les endpoints principaux qui pourraient être créés :
+L’application expose une API RESTful documentée avec Swagger.
 
-### Menu
-- `GET /api/menu` - Récupérer tout le menu
-- `GET /api/menu/{id}` - Récupérer un plat spécifique
-- `POST /api/menu` - Ajouter un plat au menu
-- `PUT /api/menu/{id}` - Mettre à jour un plat
-- `DELETE /api/menu/{id}` - Supprimer un plat
-
-### Stock
-- `GET /api/stock` - Récupérer l'état du stock
-- `POST /api/stock` - Ajouter des ingrédients au stock
-- `PUT /api/stock/{id}` - Mettre à jour la quantité d'un ingrédient
-
-### Commandes
-- `GET /api/commandes` - Récupérer toutes les commandes
-- `GET /api/commandes/{id}` - Récupérer une commande spécifique
-- `POST /api/commandes` - Créer une nouvelle commande
-- `PUT /api/commandes/{id}/status` - Mettre à jour le statut d'une commande
-
-### Employés
-- `GET /api/employes` - Récupérer tous les employés
-- `GET /api/employes/{id}` - Récupérer un employé spécifique
-- `POST /api/employes` - Ajouter un nouvel employé
-- `PUT /api/employes/{id}` - Mettre à jour les informations d'un employé
-- `DELETE /api/employes/{id}` - Supprimer un employé
+http://LaBellaTravola
 
 ## Améliorations Futures
 
@@ -136,4 +113,4 @@ Une API RESTful peut être implémentée pour exposer les fonctionnalités de ce
 
 ## Licence
 
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails. 
+Ce projet est sous **licence MIT**.
