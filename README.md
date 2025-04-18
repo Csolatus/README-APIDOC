@@ -49,9 +49,15 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
 ---
 ## Prérequis
 
-- **Java 8** ou supérieur 
-- **MySQL 5.7** ou supérieur
-- Connecteur **JDBC** pour **MySQL**
+| Logiciel    | Version recommandée | Lien de téléchargement                                        |
+|-------------|---------------------|----------------------------------------------------------------|
+| **Java JDK**| 8 ou supérieur       | [Télécharger Java](https://www.oracle.com/java/technologies/javase-downloads.html) |
+| **MySQL**   | 5.7 ou supérieur    | [Télécharger MySQL](https://dev.mysql.com/downloads/mysql/)   |
+| **JDBC Driver** | MySQL Connector/J | [Télécharger le Connecteur JDBC](https://dev.mysql.com/downloads/connector/j/) |
+
+>  Assurez-vous que MySQL est installé, en cours d'exécution et que le port est ouvert (par défaut : 3306)
+
+---
 
 ## Installation
 
