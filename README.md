@@ -10,65 +10,46 @@ Cette application Java permet de gérer l'ensemble des opérations d'un restaura
 
 L'application propose les fonctionnalités suivantes :
 
-### Gestion du Menu
-- Créer et sauvegarder des menus
-- Afficher le menu complet
-- Ajouter de nouveaux plats au menu
-- Supprimer des plats existants
-- Gérer les ingrédients de chaque plat
+| Module              | Fonctionnalités principales                                                                 |
+|---------------------|---------------------------------------------------------------------------------------------|
+| **Menu**            | - Créer / afficher / supprimer des plats<br>- Gérer les ingrédients de chaque plat         |
+| **Stock**           | - Initialiser / afficher / ajouter des ingrédients<br>- Mise à jour automatique avec commandes |
+| **Commandes**       | - Créer / afficher / mettre à jour les commandes<br>- Calcul automatique du total           |
+| **Employés**        | - Ajouter / afficher / supprimer des employés<br>- Gérer les rôles (Serveur, Cuisinier, Gérant) |
 
-### Gestion du Stock
-- Créer et initialiser un stock d'ingrédients
-- Afficher l'état actuel du stock
-- Ajouter des ingrédients au stock
-- Vérifier la disponibilité des ingrédients pour la préparation des plats
-- Mise à jour automatique du stock lors de la préparation des plats
-
-### Gestion des Commandes
-- Créer de nouvelles commandes
-- Afficher la liste des commandes existantes
-- Mettre à jour le statut des commandes
-- Calculer automatiquement le total des commandes
-
-### Gestion des Employés
-- Ajouter de nouveaux employés (Serveurs, Cuisiniers, Gérants)
-- Afficher la liste des employés
-- Supprimer des employés
-- Définir des rôles spécifiques avec des responsabilités distinctes
+---
 
 ## Architecture du Système
 
 L'application est structurée selon le modèle orienté objet avec les principales classes suivantes :
 
-### Classes Principales
-1. **Plat** : Représente un plat avec son nom, son prix, son type et ses ingrédients
-2. **Ingredient** : Représente un ingrédient avec son nom, sa quantité et son unité de mesure
-3. **Menu** : Étend la classe Plat et contient une liste de plats disponibles
-4. **Stock** : Gère l'inventaire des ingrédients disponibles
-5. **Commande** : Étend la classe Plat et contient une liste de plats commandés
-6. **Employe** (classe abstraite) : Base pour tous les types d'employés
-   - **Serveur** : Spécialisation pour les serveurs
-   - **Cuisinier** : Spécialisation pour les cuisiniers
-   - **Gerant** : Spécialisation pour les gérants
+| Classe         | Description                                                              |
+|----------------|--------------------------------------------------------------------------|
+| `Plat`         | Représente un plat (nom, prix, type, liste d’ingrédients)               |
+| `Ingredient`   | Nom, quantité, unité de mesure                                           |
+| `Menu`         | Liste de plats disponibles                                               |
+| `Stock`        | Gestion des ingrédients en stock                                         |
+| `Commande`     | Contient les plats commandés                                             |
+| `Employe`      | Classe abstraite : `Serveur`, `Cuisinier`, `Gerant`                      |
+| `Database`     | Gère les connexions et requêtes vers MySQL via JDBC                     |
+
+---
 
 ### Base de données
-- **Database** : Classe utilitaire gérant toutes les interactions avec la base de données MySQL
-- Structure relationnelle avec des tables pour les plats, ingrédients, commandes et employés
 
-## Schéma de Base de Données
+| Table                | Rôle                                                                 |
+|----------------------|----------------------------------------------------------------------|
+| `ingredients`        | Ingrédients disponibles                                              |
+| `plats`              | Plats proposés dans le menu                                          |
+| `plats_ingredients`  | Liaison entre plats et ingrédients                                   |
+| `commandes`          | Informations sur les commandes                                       |
+| `commandes_plats`    | Liaison entre commandes et plats                                     |
+| `employes`           | Informations sur les employés                                        |
 
-L'application utilise les tables suivantes :
-
-- **ingredients** : Stocke les informations sur les ingrédients
-- **plats** : Stocke les informations sur les plats
-- **plats_ingredients** : Table de liaison entre plats et ingrédients
-- **commandes** : Stocke les informations sur les commandes
-- **commandes_plats** : Table de liaison entre commandes et plats
-- **employes** : Stocke les informations sur les employés
-
+---
 ## Prérequis
 
-- Java 8 ou supérieur
+- Java 8 ou supérieur 
 - MySQL 5.7 ou supérieur
 - Connecteur JDBC pour MySQL
 
