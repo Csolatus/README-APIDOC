@@ -178,3 +178,5 @@ http://LaBellaTravola
 ## 📄 Licence
 
 Ce projet est sous **licence MIT**.
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Csolatus)](https://github.com/anuraghazra/github-readme-stats)
