@@ -1,12 +1,12 @@
 <div align="center"> <img src="public/zizou.webp" width=250px> </div>
 
-# Application de Gestion de Restaurant
+# 🍽️ Application de Gestion de Restaurant
 
-## Description
+## 🧾 Description
 
 Cette application **Java** permet de gérer l'ensemble des opérations d'un **restaurant**, depuis la création de **menus** jusqu'à la gestion des **commandes**, des **stocks** et du **personnel**. Elle utilise une base de données **MySQL** pour stocker toutes les informations et offre une **interface en ligne de commande** pour interagir avec le système.
 
-## Fonctionnalités
+## ✅ Fonctionnalités
 
 L'application propose les **fonctionnalités suivantes** :
 
@@ -19,7 +19,7 @@ L'application propose les **fonctionnalités suivantes** :
 
 ---
 
-## Architecture du Système
+## 🧱 Architecture du Système
 
 L'application est structurée selon le modèle **orienté objet** avec les principales classes suivantes :
 
@@ -35,7 +35,7 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
 
 ---
 
-### Base de données
+### 🗃️ Base de données
 
 | Table                | Rôle                                                                 |
 |----------------------|----------------------------------------------------------------------|
@@ -47,7 +47,7 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
 | `employes`           | Informations sur les **employés**                                        |
 
 ---
-## Prérequis
+## ⚙️ Prérequis
 
 | Logiciel    | Version recommandée | Lien de téléchargement                                        |
 |-------------|---------------------|----------------------------------------------------------------|
@@ -55,11 +55,11 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
 | **MySQL**   | 5.7 ou supérieur    | [Télécharger MySQL](https://dev.mysql.com/downloads/mysql/)   |
 | **JDBC Driver** | MySQL Connector/J | [Télécharger le Connecteur JDBC](https://dev.mysql.com/downloads/connector/j/) |
 
->  Assurez-vous que MySQL est installé, en cours d'exécution et que le port est ouvert (par défaut : 3306)
+> ⚠️ Assurez-vous que MySQL est installé, en cours d'exécution et que le port est ouvert (par défaut : 3306)
 
 ---
 
-## Installation
+## 🛠️ Installation
 
 1. **Clonez** ce dépôt sur votre machine locale
 2. Assurez-vous que **MySQL** est **installé** et en **cours d'exécution**
@@ -70,15 +70,15 @@ L'application est structurée selon le modèle **orienté objet** avec les princ
    - `DB_URL`
 5. **Compilez** le projet
 
-## Utilisation
+## ▶️ Utilisation
 
 1. Lancez l'**application** via la classe `Main`
 2. Utilisez le **menu interactif** pour accéder aux différentes **fonctionnalités**
 3. Suivez les **instructions** affichées à l'écran
 
-## Exemples d'Utilisation
+## 💡 Exemples d'Utilisation
 
-### Créer un Menu
+### ➕ Créer un Menu
 ```java
 Menu menu = new Menu("Menu du restaurant", 0, "Menu");
 
@@ -96,20 +96,22 @@ menu.ajouterPlat(pizza);
 Database.sauvegarderMenu(menu);
 ```
 
-### Créer une Commande
+### 🧾 Créer une Commande
 ```java
 Commande commande = new Commande("Commande client", 0, "Commande");
 commande.ajouterPlat(pizza);
 Database.sauvegarderCommande(commande);
 ```
 
-## API RESTful
+## 🌐 API RESTful
 
 L’application expose une API RESTful documentée avec Swagger.
 
+## 🔗 Base Url 
+
 http://LaBellaTravola
 
-## Améliorations Futures
+## 🚀 Améliorations Futures
 
 - Interface graphique utilisateur (GUI)
 - Authentification et gestion des rôles
@@ -117,6 +119,6 @@ http://LaBellaTravola
 - Gestion des réservations de tables
 - Système de fidélité clients
 
-## Licence
+## 📄 Licence
 
 Ce projet est sous **licence MIT**.
